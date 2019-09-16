@@ -19,11 +19,14 @@ export default {
 <style>
 @font-face {
     font-family: 'cormorant';
-    src: url('fonts/Cormorant-MediumItalic.otf') format('otf');
-    font-weight: normal;
-    font-style: normal;
-
+    src: url('./fonts/Cormorant-MediumItalic.otf') format('otf');
 }
+
+@font-face {
+    font-family: 'italianno';
+    src: url('./fonts/Italianno-Regular-OTF.otf') format('otf');
+}
+
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -53,14 +56,17 @@ export default {
    * Styles pour un bouton
    */
 
-  .btn:disabled {
-    background: linear-gradient(to bottom, #eeeeee, #d3d3d3);
-    cursor: not-allowed;
-  }
 
   .btn.btn-small {
     padding: 0.15em 0.5em;
     font-size: 0.9em;
+    text-decoration: none;
+    color: #85B039;
+  }
+
+  .btn.btn-small:hover {
+    font-size: 20px;
+    transition: 0.5s;
   }
 
   /**

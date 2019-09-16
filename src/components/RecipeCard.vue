@@ -3,7 +3,7 @@
   <div class="card">
    <img :src="recipe.photo || DEFAULT_PHOTO" :alt="`Photo de ${recipe.titre}`">
   <div class="card-body">
-    <h5 class="card-title">{{recipe.titre}}</h5>
+    <h4 class="card-title">{{recipe.titre}}</h4>
     <p class="card-text">{{recipe.description}}</p>
   </div>
   <ul class="list-group list-group-flush" style="text-align: left">
@@ -42,15 +42,21 @@ export default {
 </script>
 <style scoped>
 .card{
+  padding: 20px;
+  min-height: 665px;
   border-radius: 1rem;
   -webkit-box-shadow: 8px 8px 30px -19px rgba(0,0,0,0.54);
   -moz-box-shadow: 8px 8px 30px -19px rgba(0,0,0,0.54);
   box-shadow: 8px 8px 30px -19px rgba(0,0,0,0.54);
   background-color: white;
 }
-.mb-3{
-    border: 1px solid grey;
+
+.card-title {
+  color: #85B039;
+  font-size: 25px;
+  font-family: 'cormorant';
 }
+
 img{
     width: 100%;
     height: auto;

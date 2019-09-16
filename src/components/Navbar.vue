@@ -31,7 +31,7 @@ export default {
   border-bottom: 10px solid white;
 }
 .navbar-titre{
-  font-family: 'cormorant';
+  font-family: 'italianno';
   font-size: 60px;
 }
 .navbar > .container {
