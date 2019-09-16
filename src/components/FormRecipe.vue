@@ -7,7 +7,7 @@
         type="text"
         class="form-control"
         id="titre"
-        placeholder="Ma nouvelle recette intergalactique"
+        placeholder="Ma nouvelle recette"
         v-model="recipe.titre"
         @blur="$v.recipe.titre.$touch()"
       />
@@ -22,7 +22,7 @@
         type="text"
         class="form-control"
         id="description"
-        placeholder="Un plat d'une autre galaxie..."
+        placeholder="Nom du plat"
         v-model="recipe.description"
         @blur="$v.recipe.description.$touch()"
       />
@@ -201,7 +201,6 @@
 
 <script>
 import { required, numeric, minLength} from "vuelidate/lib/validators";
-
 export default {
   name: "FormRecipe",
   props: {
@@ -283,5 +282,13 @@ export default {
 }
 .custom-file-input:lang(en) ~ .custom-file-label::after {
   content: "Parcourir";
+}
+.input-group > .form-control:not(:first-child){
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+.input-group > .form-control:not(:last-child){
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
 }
 </style>
