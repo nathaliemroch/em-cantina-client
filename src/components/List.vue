@@ -1,7 +1,6 @@
 <template>
   <div class="container centered">
     <h1>Liste des recettes</h1>
-    <hr>
 
     <form class="filterform" @submit.prevent> <!-- submit.prevent évite d'envoyer des informations-->
       <input type="search" placeholder="Tapez un nom..." v-model="searchText">

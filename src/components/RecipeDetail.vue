@@ -1,11 +1,11 @@
 <template>
-  <div class="card mb-3">
+  <div class="box-card">
     <div class="col-md-5">
       <img :src="recipe.photo || DEFAULT_PHOTO" :alt="`Photo de ${recipe.titre}`" />
     </div>
-    <div class="">
+    <div>
       <div class="card">
-        <h1 class="title">{{recipe.titre}}</h1>
+        <h3 class="title">{{recipe.titre}}</h3>
         <p class="text">{{recipe.description}}</p>
         <ul class="list-group list-group-flush" style="text-align: left">
           <li class="list-group-item"><b>Temps de préparation :</b> {{recipe.tempsPreparation}} min</li>
@@ -57,7 +57,8 @@ export default {
 .title{
   padding-top: 2%;
   font-family: 'cormorant';
-  font-size: 70px;
+  font-size: 40px;
+  color: #85b039;
 }
 ol {
   list-style: none;
@@ -71,11 +72,12 @@ ol li::before {
   content: counter(my-awesome-counter) ". ";
   font-family: 'cormorant';
 }
-.mb-3 {
+.box-card {
   width: 100%;
   border: 1px solid rgb(233, 233, 233);
   display: flex;
   flex-flow: row;
+  background-color: #fff;
 }
 img {
   width: 100%;

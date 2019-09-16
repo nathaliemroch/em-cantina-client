@@ -1,7 +1,6 @@
 <template>
   <div class="container centered">
     <h1>Ajouter une recette</h1>
-    <hr>
     <Form @send="addRecipe"></Form>
   </div>
 </template>
@@ -22,7 +21,7 @@ export default {
         .then(() => {
           // Redirige le visiteur vers la page de listing
           this.$router.replace("/list");
-          this.$toasted.success("Recette correctement ajoutée 😉 !");
+          this.$toasted.success("Recette ajoutée !");
         })
         .catch(({ message }) => this.$toasted.error(message));
     }

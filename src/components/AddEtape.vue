@@ -2,7 +2,7 @@
   <div id="addEtape">
       <div class="form-group" v-for="(ingredient, index) in recipe.etapes" :key="index">
       <label for="ingredient">Etape :</label>
-      <input type="text" id="quantite" placeholder="Exemple : peser la farine">
+      <input type="text" id="quantite" placeholder="Ajouter du sel">
     </div>
     <div>Ajouter une étape
       <button class="button" @click.prevent="addRow">➕</button>

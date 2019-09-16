@@ -1,9 +1,6 @@
 <template>
   <div class="conteneur-big centered">
     <h1>Bienvenue sur Cantina</h1>
-    <p>Une appli pour les cuisiner tous</p>
-    <hr>
-    <h3>Avez vous déjà essayé de cuisiner...</h3>
 
     <RecipeDetail :recipe="recipe" v-if="recipe" @remove="removeRecipe"/>
 
