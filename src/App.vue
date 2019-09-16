@@ -19,12 +19,14 @@ export default {
 <style>
 @font-face {
     font-family: 'cormorant';
-    src: url('./fonts/Cormorant-MediumItalic.otf') format('otf');
+    src: url('fonts/cormorant-mediumitalic-webfont.woff') format('woff'),
+         url('fonts/cormorant-mediumitalic-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'italianno';
-    src: url('./fonts/Italianno-Regular-OTF.otf') format('otf');
+    src: url('fonts/italianno-regular-otf-webfont.woff') format('woff'),
+         url('fonts/italianno-regular-otf-webfont.woff2') format('woff2');
 }
 
   html {

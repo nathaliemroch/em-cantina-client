@@ -43,7 +43,7 @@ export default {
 <style scoped>
 .card{
   padding: 20px;
-  min-height: 665px;
+  min-height: 700px;
   border-radius: 1rem;
   -webkit-box-shadow: 8px 8px 30px -19px rgba(0,0,0,0.54);
   -moz-box-shadow: 8px 8px 30px -19px rgba(0,0,0,0.54);
