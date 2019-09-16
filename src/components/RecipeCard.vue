@@ -1,82 +1,77 @@
 <template>
-  <div class="card card-size">
-    <img class="card-img-top" :src="detailsRecipe.photo || DEFAULT_PHOTO" :alt="'photo de ' + detailsRecipe.titre" />
-    <div class="card-body">
-      <h5 class="card-title">
-        <router-link :to="`/recette/${detailsRecipe.id}`">{{detailsRecipe.titre}}</router-link>
-      </h5>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item text-muted">Nombre : <span class="font-weight-bold">{{detailsRecipe.personnes | formatNbPersonne}}</span></li>
-      <li class="list-group-item text-muted">Difficulté : <span class="font-weight-bold">{{detailsRecipe.niveau}}</span></li>
-      <li class="list-group-item text-muted">Temps de préparation : <span class="font-weight-bold">{{detailsRecipe.tempsPreparation | formatTpsPreparation}}</span></li>
-    </ul>
-    <div class="card-footer text-center">
-      <router-link :to="`/recette/edit/${detailsRecipe.id}`" class="btn btn-outline-info mr-2">Modifier</router-link>
-      <a href="#" class="btn btn-outline-danger" @click.prevent="clickToRemove">Supprimer</a>
-    </div>
+<div class="conteneur_g">
+  <div class="card">
+   <img :src="recipe.photo || DEFAULT_PHOTO" :alt="`Photo de ${recipe.titre}`">
+  <div class="card-body">
+    <h5 class="card-title">{{recipe.titre}}</h5>
+    <p class="card-text">{{recipe.description}}</p>
   </div>
+  <ul class="list-group list-group-flush" style="text-align: left">
+    <li class="list-group-item">Temps de préparation : {{recipe.tempsPreparation}} min</li>
+    <li class="list-group-item">Nombre de convives : {{recipe.personnes}} personne(s)</li>
+    <li class="list-group-item">Niveau : {{recipe.niveau}}</li>
+  </ul>
+  <div class="card-body">
+    <router-link :to="`/read/${recipe.id}`" class="btn btn-small">Lire</router-link>
+    <router-link :to="`/edit/${recipe.id}`" class="btn btn-small">Modifier</router-link>
+    <a href="#" class="btn btn-small" @click.prevent="onRemove">Supprimer</a>
+  </div>
+</div>
+</div>
 </template>
-
 <script>
 export default {
   name: "RecipeCard",
   props: {
-    dataRecipe : {
-      type : Object,
-      required: true
+    recipe: {
+      type: Object
     }
   },
-  data: function(){
-    return{
-      detailsRecipe : this.dataRecipe
-    }
-  },
-  filters: {
-    formatNbPersonne: function(value){
-      if(value > 1)
-      {
-        return `${value} personnes`
-      }
-      else{
-        return `${value} personne`
-      }
-    },
-    formatTpsPreparation: function(value){
-      if(value/60 >= 1)
-      {
-        if(value%60 == 0){
-          return `${Math.trunc(value/60)}h`;
-        }
-        return `${Math.trunc(value/60)}h${value%60}min`;
-      }
-      else{
-        return `${value%60}min`;
-      }
-    }
-  },
-  computed: {
+  computed : {
     DEFAULT_PHOTO: function(){
-      // require sinon il ne trouve pas la photo
-      return require('../assets/default-image-recipe-Miam.jpg');
+      return "https://cdn.pixabay.com/photo/2019/09/15/14/42/14-42-27-793_960_720.png"
     }
   },
   methods: {
-    clickToRemove : function(){
-      this.$emit("clickToRemove", this.detailsRecipe.id);
+    onRemove: function(){
+      console.log("onRemove");
+      this.$emit("remove",this.recipe);
     }
   }
-};
+}
 </script>
-
 <style scoped>
-.card-size{
-  width: 21rem;
+.card{
+  border-radius: 1rem;
+  -webkit-box-shadow: 8px 8px 30px -19px rgba(0,0,0,0.54);
+  -moz-box-shadow: 8px 8px 30px -19px rgba(0,0,0,0.54);
+  box-shadow: 8px 8px 30px -19px rgba(0,0,0,0.54);
+  background-color: white;
 }
-.card-title a{
-  color: #d42e48;
+.mb-3{
+    border: 1px solid grey;
 }
-.card-title a:hover{
-  color: #d42e48;
+img{
+    width: 100%;
+    height: auto;
+}
+h3, p{
+    text-align: left;
+}
+.card-text-col-3-big{
+    width: 40%;
+    display: inline-block;
+}
+.card-text-col-3-small{
+    width: 20%;
+    display: inline-block;
+}
+.boutons{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+.data-v-0ce62faa{
+  margin: 0;
 }
 </style>

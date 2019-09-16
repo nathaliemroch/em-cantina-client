@@ -1,14 +1,37 @@
 import VueRouter from 'vue-router';
-import Home from './components/Home';
-import AddRecipe from './components/AddRecipe';
-import MoreInformationsRecipe from './components/MoreInformationsRecipe.vue';
-import EditRecipe from './components/EditRecipe.vue';
+import Home from './components/Home.vue';
+import List from './components/List.vue';
+import Edit from './components/Edit.vue';
+import Add from './components/Add.vue';
+import Read from './components/Read.vue'
 
-
-const routes = [
-    { path: '/', component: Home },
-    { path: '/AddRecipe', component: AddRecipe },
-    { path: '/recette/:id', component: MoreInformationsRecipe },
-    { path: '/recette/edit/:id', component: EditRecipe }
- ];
- 
+export default new VueRouter({
+    name : "VueRouter",
+    routes : [
+        {
+            path: '/home',
+            component: Home,
+            name : 'Home'
+        },
+        {
+            path: '/list',
+            component: List,
+            name : 'List'
+        },
+        {
+            path: '/edit/:id',
+            component: Edit,
+            name : 'Edit'
+        },
+        {
+            path: '/add',
+            component: Add,
+            name : 'Add'
+        },
+        {
+            path: '/read/:id',
+            component: Read,
+            name : 'Read'
+        }
+    ]
+})

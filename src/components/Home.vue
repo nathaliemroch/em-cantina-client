@@ -1,96 +1,69 @@
 <template>
-  <div class="container py-3">
-    <h1 class="text-white">Liste des recettes</h1>
-    <p class="text-white">Voici les recettes pour de bons petits plats !</p>
-    <SearchBarRecipe @useFilter="applyFilter"/>
-    <div class="container-card">
-      <RecipeCard class="m-3" v-for="recipe in listRecipesFiltered" :key="recipe.id" :dataRecipe="recipe" @clickToRemove="removeRecipe"/>
+  <div class="conteneur-big centered">
+    <h1>Bienvenue sur Cantina</h1>
+    <p>Une appli pour les cuisiner tous</p>
+    <hr>
+    <h3>Avez vous déjà essayé de cuisiner...</h3>
+
+    <RecipeDetail :recipe="recipe" v-if="recipe" @remove="removeRecipe"/>
+
+    <div class="actions">
+      <a href="#" class="btn" @click.prevent="refreshPage">
+        <i class="fa fa-random"/>Essayer une autre recette
+      </a>
     </div>
   </div>
 </template>
 
 <script>
-import RecipeCard from "./RecipeCard";
-import SearchBarRecipe from "./SearchBarRecipe";
-
-import data from "../utilities/data";
+import RecipeDetail from "./RecipeDetail.vue";
+import UserService from "../services/UserService.js";
 
 export default {
   name: "Home",
   components: {
-    RecipeCard,
-    SearchBarRecipe
+    RecipeDetail
   },
   data: function() {
     return {
-      listRecipes: [],
-      listRecipesFiltered:[]
+      recipe: null
     };
   },
-  created: function() {
-    data.getAllRecipes().then(res => {
-      this.listRecipes = res.data;
-      this.listRecipesFiltered = res.data;
-    }).catch((error)=>{
-      this.$toasted.error(error.message);
-    });
+  methods: {
+    getRandomRecipe: function() {
+      this.recipe = this.recipe[Math.floor(Math.random() * this.recipe.length)];
+    },
+    refreshPage: function(){
+        document.location.reload(true);
+    },
+    removeRecipe: function(recipeToDelete) {
+      UserService.removeRecipe(recipeToDelete)
+        .then(() => {
+          let index = this.recipe(recipeToDelete);
+          if (index > -1) {
+            this.recipe.splice(index, 1);
+          }
+          this.$toasted.success("Collaborateur supprimé ! 💪");
+          this.getRandomRecipe();
+        })
+        .catch(({ message }) => this.$toasted.error(message));
+    }
   },
-  methods:{
-    applyFilter: function(paramsFilter){
-      this.$toasted.show(`${paramsFilter.titre},<br> ${paramsFilter.difficulte},<br> ${paramsFilter.tpsPreparation},<br>${paramsFilter.nbPersonnes}`);
-      this.listRecipesFiltered = this.listRecipes.filter((myRecipe)=>{
-        let difficulte = ""
-        if(paramsFilter.difficulte.toLowerCase() !== "tous")
-        {
-          difficulte = paramsFilter.difficulte.toLowerCase();
-        }
-        //Titre
-        if(!myRecipe.titre.toLowerCase().includes(paramsFilter.titre.toLowerCase().trim())) {return false;}
-        //Difficulté
-        if(!myRecipe.niveau.toLowerCase().includes(difficulte)) {return false;}
-        //Temps de préparation
-        if(myRecipe.tempsPreparation > paramsFilter.tpsPreparation && paramsFilter.tpsPreparation != "" ) {return false;}
-        //Nombre de personne minimum
-        if(myRecipe.personnes < paramsFilter.nbPersonnes[0] &&
-           paramsFilter.nbPersonnes[0] !== "")
-           {return false;}
-        //Nombre de personne maximum
-        if(myRecipe.personnes > paramsFilter.nbPersonnes[1] &&
-           paramsFilter.nbPersonnes[1] !== "")
-           {return false;}
-
-        return true;
-
+  created: function() {
+    UserService.fetchAll()
+      .then(usersList => {
+        this.recipe = usersList;
+        this.getRandomRecipe();
       })
-    },
-    removeRecipe: function(idRecipe){
-      data.removeRecipe(idRecipe)
-        .then(()=>{
-          this.removeFromList(idRecipe)
-          this.$toasted.success("La recette a été supprimé.");
-        })
-        .catch(()=>{
-          this.$toasted.error("La recette n'a pas pu être supprimé.");
-        })
-    },
-    removeFromList : function(idRecipe){
-      for (let keyRecipe in this.listRecipes) {
-        if(this.listRecipes[keyRecipe].id === idRecipe)
-        {
-          this.listRecipes.splice(keyRecipe,1);
-        }
-      }
-    }   
+      .catch(({ message }) => this.$toasted.error(message));
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.container-card {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
+<style>
+.conteneur-big{
+width: 75%;
+margin: 0 auto;
 }
+
 </style>
