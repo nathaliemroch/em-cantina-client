@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-          <label for="personnes">personnes :</label>
+          <label for="personnes">Nombre de personnes :</label>
           <input
             min="1"
             max="20"
