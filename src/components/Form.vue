@@ -56,13 +56,13 @@
 
       <div class="col-2">
         <div class="form-group">
-          <label for="tempsPreparation">tempsPreparation :</label>
+          <label for="tempsPreparation">Temps de préparation :</label>
           <input
             type="number"
             v-model.number="$v.recipe.tempsPreparation.$model"
             @blur="$v.recipe.tempsPreparation.$touch()"
             id="tempsPreparation"
-            placeholder="tempsPreparations"
+            placeholder="temps de préparation"
           />
           <span
             v-if="$v.recipe.tempsPreparation.$dirty && !$v.recipe.tempsPreparation.integer"
@@ -195,6 +195,11 @@ export default {
   background-color: white;
 }
 
+label {
+  font-family: 'cormorant';
+  font-size: 25px;
+}
+
 @media screen and (max-width: 780px) {
  .col-2 {
   flex-direction: column;
@@ -237,6 +242,7 @@ button {
   justify-content: center;
   align-items: center;
   font-family: 'italianno';
+  font-size: 25px;
 }
 
 button:hover {
