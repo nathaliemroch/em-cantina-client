@@ -51,6 +51,7 @@ export default {
   padding: 0.25em 1em;
   transition: all 150ms;
   transform: scale(1);
+  margin: 0 10px;
 }
 .navbar a:hover {
   background-color: #85B039;

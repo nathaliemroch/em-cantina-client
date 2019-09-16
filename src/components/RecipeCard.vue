@@ -34,7 +34,6 @@ export default {
   },
   methods: {
     onRemove: function(){
-      console.log("onRemove");
       this.$emit("remove",this.recipe);
     }
   }

@@ -122,7 +122,7 @@ export default {
 .wrapper {
   display: flex;
   justify-content: space-between;
-  margin: auto;
+   margin: 20px auto;
 }
 .wrapper2 {
   display: flex;

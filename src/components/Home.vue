@@ -34,17 +34,15 @@ export default {
         document.location.reload(true);
     },
     removeRecipe: function(recipeToDelete) {
+      console.log(recipeToDelete);
       RecipeService.removeRecipe(recipeToDelete)
-        .then(() => {
-          let index = this.recipe(recipeToDelete);
-          if (index > -1) {
-            this.recipe.splice(index, 1);
-          }
-          this.$toasted.success("Collaborateur supprimé ! 💪");
-          this.getRandomRecipe();
+        .then(res => {
+          this.$router.push('/list');
+          this.$toasted.success(`Recette ${res.recette.titre} supprimée !`);
         })
         .catch(({ message }) => this.$toasted.error(message));
     }
+    
   },
   created: function() {
     RecipeService.fetchAll()
