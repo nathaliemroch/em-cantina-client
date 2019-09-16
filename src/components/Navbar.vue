@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="navbar-brand align-middle"><img src="../assets/cantina-logo.png"/><span class="align-middle px-2">Cantina</span></div>
+      <div class="navbar-brand align-middle"><img src="../assets/logo.png"/><span class="align-middle px-2">Cantina</span></div>
       <button
         class="navbar-toggler"
         type="button"

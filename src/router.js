@@ -12,8 +12,3 @@ const routes = [
     { path: '/recette/edit/:id', component: EditRecipe }
  ];
  
- const router = new VueRouter({
-    routes
- });
- 
- export default router
