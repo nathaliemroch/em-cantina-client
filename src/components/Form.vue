@@ -1,84 +1,120 @@
 <template>
-<form class="userform" @submit.prevent="onSubmit">
+  <form class="userform" @submit.prevent="onSubmit">
+    <div class="container">
+      <div class="form-group">
+        <label for="titre">titre :</label>
+        <input
+          type="text"
+          v-model="$v.recipe.titre.$model"
+          @blur="$v.recipe.titre.$touch()"
+          id="titre"
+          placeholder="titre"
+        />
+        <span v-if="$v.recipe.titre.$dirty && !$v.recipe.titre.required">Le champs est requis</span>
+      </div>
 
-    <div class="form-group">
-      <label for="photo">Photo :</label>
-      <input type="url" v-model.lazy="$v.recipe.photo.$model" id="photo" placeholder="http://">
-      <span v-if="!$v.recipe.photo.url">L'URL est invalide</span>
+      <div class="form-group">
+        <label for="description">description :</label>
+        <input
+          type="text"
+          v-model="$v.recipe.description.$model"
+          @blur="$v.recipe.description.$touch()"
+          id="description"
+          placeholder="description"
+        />
+        <span
+          v-if="$v.recipe.description.$dirty && !$v.recipe.description.required"
+        >Le champs est requis</span>
+      </div>
+
+      <div class="col-2">
+        <div class="form-group">
+          <label for="niveau">niveau :</label>
+          <select v-model="$v.recipe.niveau.$model">
+            <option :value="maitre">{{maitre}}</option>
+            <option :value="jedi">{{jedi}}</option>
+            <option :value="padawan">{{padawan}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="personnes">personnes :</label>
+          <input
+            min="1"
+            max="20"
+            type="number"
+            v-model.number="$v.recipe.personnes.$model"
+            @blur="$v.recipe.personnes.$touch()"
+            id="personnes"
+            placeholder="personnes"
+          />
+          <span
+            v-if="$v.recipe.personnes.$dirty && !$v.recipe.personnes.integer"
+          >Le champs est requis</span>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div class="form-group">
+          <label for="tempsPreparation">tempsPreparation :</label>
+          <input
+            type="number"
+            v-model.number="$v.recipe.tempsPreparation.$model"
+            @blur="$v.recipe.tempsPreparation.$touch()"
+            id="tempsPreparation"
+            placeholder="tempsPreparations"
+          />
+          <span
+            v-if="$v.recipe.tempsPreparation.$dirty && !$v.recipe.tempsPreparation.integer"
+          >Le champs est requis</span>
+        </div>
+
+        <div class="form-group">
+          <label for="photo">Photo :</label>
+          <input type="url" v-model.lazy="$v.recipe.photo.$model" id="photo" placeholder="http://" />
+        </div>
+      </div>
     </div>
-
-    <div class="form-group">
-      <label for="titre">Titre :</label>
-      <input
-        type="text"
-        v-model="$v.recipe.titre.$model"
-        @blur="$v.recipe.titre.$touch()"
-        id="titre"
-        placeholder="Titre"
+    <div class="container">
+      <div
+        class="form-group"
+        v-for="(ingredient,index) in recipe.ingredients"
+        :recipe="ingredient"
+        :key="index"
       >
-      <span v-if="$v.recipe.titre.$dirty && !$v.recipe.titre.required">Le champs est requis</span>
+        <label for="ingredient">Ingredients :</label> &nbsp;
+        <div class="col-2">
+          <input type="text" v-model="ingredient[0]" id="ingredient" placeholder="25L" />
+          <input type="text" v-model="ingredient[1]" id="ingredient" placeholder="de Lait" />
+          &nbsp;
+          <a href="#" title="Supprimer cette tâche" @click.prevent="supprimerIngredient(index)">
+            <font-awesome-icon icon="times-circle" />
+          </a>
+          <span v-if="$v.recipe.ingredient.$dirty">Le champs est requis</span>
+        </div>
+      </div>
+      <button @click.prevent="ajouterIngredient">
+        <font-awesome-icon icon="plus-circle" />&nbsp;Ajouter un ingrédient
+      </button>
     </div>
 
-    <div class="form-group">
-      <label for="description">Description :</label>
-      <input
-        type="text"
-        v-model="recipe.description"
-        id="description"
-        placeholder="Description"
-      >
-      <span v-if="recipe.description.$dirty && !recipe.description.required">Le champs est requis</span>
-    </div>
+    <div class="container">
+      <div class="form-group" v-for="(etape, index) in recipe.etapes" :recipe="etape" :key="index">
+        <label for="etapes">Etapes :</label> &nbsp;
+        <div class="col-2">
+          <input type="text" v-model="recipe.etapes[index]" id="etape" placeholder="etape" />
+          &nbsp;
+          <a href="#" title="Supprimer cette tâche" @click.prevent="supprimerEtape(index)">
+            <font-awesome-icon icon="times-circle" />
+          </a>
+          <span v-if="$v.recipe.etape.$dirty">Le champs est requis</span>
+        </div>
+      </div>
 
-    <div class="form-group">
-      <label for="niveau">Niveau :</label>
-      <input
-        type="text"
-        v-model="recipe.niveau"
-        id="niveau"
-        placeholder="niveau"
-      >
-      <span v-if="recipe.niveau.$dirty && !recipe.niveau.required">Le champs est requis</span>
+      <button @click.prevent="ajouterEtape">
+        <font-awesome-icon icon="plus-circle" />&nbsp;Ajouter une étape
+      </button>
     </div>
-
-    <div class="form-group">      
-      <label for="personnes">Nombre de convives :</label>
-      <input
-        type="number"
-        min="1" max="10"
-        v-model.number="recipe.personnes"
-        id="personnes"
-        placeholder="Ex: 6"
-      >
-    </div>
-
-    <div class="form-group">      
-      <label for="tempsPreparation">Temps de préparation :</label>
-      <input
-        type="number"
-        v-model.number="recipe.tempsPreparation"
-        id="tempsPreparation"
-        placeholder="Ex: 45"
-      >
-    </div>
-
-    <div id="addIngredient">
-      <div class="form-group" v-for="ingredient in recipe.ingredients" :key="ingredient.id">
-      <label for="ingredient">Ingrédient :</label>
-      <input type="text" id="quantite" placeholder="Exemple : 100g" v-model="ingredient[0]">
-      <input type="text" id="nom_ingredient" placeholder="Exemple : de farine" v-model="ingredient[1]">
-    </div>
-  </div>
-  <addIngredient/>
-
-  <div id="addEtape">
-      <div class="form-group" v-for="(etapes) in recipe.etapes" :key="etapes.id">
-      <label for="etapes">Etapes :</label>
-      <input type="text" id="etape" placeholder="Exemple : Peser la farine" :value="etapes">
-    </div>
-  </div>
-  <addEtape/>
-
     <div class="actions">
       <button type="submit" class="btn">Envoyer</button>
     </div>
@@ -86,16 +122,11 @@
 </template>
 
 <script>
-import { required, alpha, url } from "vuelidate/lib/validators";
-import addIngredient from "./AddIngredient.vue";
-import addEtape from "./AddEtape.vue";
+import RecipeService from "../services/RecipeService.js";
+import { required, url, alpha, integer } from "vuelidate/lib/validators";
 
 export default {
   name: "Form",
-  components: {
-    addIngredient,
-    addEtape
-  },
   props: {
     recipe: {
       type: Object,
@@ -104,35 +135,50 @@ export default {
           id: null,
           titre: "",
           description: "",
-          niveau:"",
+          niveau: "",
           personnes: null,
-          tempsPreparation: null,
-          ingredients: [["" , ""]],
+          ingredients: [[""]],
           etapes: [""],
-          photo: "",
+          tempsPreparation: null,
+          photo: ""
         };
       }
     }
   },
-
+  data: function() {
+    return {
+      maitre: "maitre",
+      jedi: "jedi",
+      padawan: "padawan"
+    };
+  },
   validations: {
     recipe: {
-      photo: { url },
       titre: { required },
-      description: { required, alpha },
-      niveau: { required, alpha },
-      personnes: { required },
-      tempsPreparation: { required },
-      ingredients: { required },
-      etapes: { required },
+      description: { required },
+      niveau: { required },
+      personnes: { required, integer },
+      ingredient: { alpha },
+      etape: { alpha },
+      tempsPreparation: { required, integer },
+      photo: {}
     }
   },
-
   methods: {
+    ajouterIngredient: function() {
+      this.recipe.ingredients.push([]);
+    },
+    ajouterEtape: function() {
+      this.recipe.etapes.push([]);
+    },
+    supprimerIngredient: function(index) {
+      this.recipe.ingredients.splice(index, 1);
+    },
+    supprimerEtape: function(index) {
+      this.recipe.etapes.splice(index, 1);
+    },
     onSubmit: function() {
-      //Si les règles de l'objet 'recipe' sont invalides, on stoppe l'exécution de la fonction
-      if (this.recipe.$invalid) return this.recipe;
-      //Fait remonter un événement vers le composant parent
+      if (this.$v.recipe.$invalid) return this.$v.recipe.$touch();
       this.$emit("send", this.recipe);
     }
   }
@@ -140,41 +186,76 @@ export default {
 </script>
 
 <style scoped>
-form input{
-  background: white;
-}
-.recipeform {
-  margin: 2em 0;
-}
-
-.recipeform .form-group {
-  margin-bottom: 1.2em;
+.container {
+  border-radius: 1rem;
+  box-sizing: border-box;
+  margin: auto auto 30px auto;
+  max-width: 800px;
+  box-shadow: 8px 8px 30px -19px rgba(0,0,0,0.54);
+  background-color: white;
 }
 
-.recipeform label {
+@media screen and (max-width: 780px) {
+ .col-2 {
+  flex-direction: column;
+}
+
+}
+.col-2 {
+  display: flex;
+  align-items: center;
+  padding: 0px;
+}
+
+.col-2 div {
+  width: 100%;
+}
+
+input,
+select {
+  width: 100%;
+  outline-color: red;
+  padding: 12px 20px;
+  margin: 8px 0;
   display: inline-block;
-  vertical-align: middle;
-  min-width: 150px;
-  text-align: right;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
-.recipeform input[type="radio"] + label {
-  min-width: 0;
-  text-align: left;
+
+button {
+  width: 30%;
+  background-color:#85B039;;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'italianno';
 }
 
-.recipeform input:not([type="radio"]) {
-  min-width: 200px;
-  vertical-align: middle;
+button:hover {
+  background-color: #85B039;
+  color: #FDE166;
+  transform: scale(1.05);
 }
 
-.recipeform input ~ span {
-  display: block;
-  font-size: 0.8em;
-  color: red;
+button[type="submit"] {
+  width: 35%;
 }
 
-.recipeform .input-error {
-  border: 1px solid red;
+input[type="submit"]:hover {
+  background-color: #45a049;
 }
+
+div {
+  border-radius: 5px;
+  padding: 20px;
+}
+
 </style>

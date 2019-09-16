@@ -6,8 +6,8 @@
       <input type="search" placeholder="Tapez un nom..." v-model="searchText">
       <label for="filter">Filtrer par :</label>
       <select name="filterBy" v-model="filterValue">
-        <option value="name">Nom</option>
-        <option value="niveau">Niveau</option>
+        <option value="name">Nom de la Recette</option>
+        <option value="niveau">Niveau de difficulté</option>
       </select>
     </form>
 
@@ -18,7 +18,7 @@
 </template>
 <script>
 import RecipeCard from './RecipeCard.vue';
-import UserService from '../services/UserService.js';
+import RecipeService from '../services/RecipeService.js';
 export default {
   name: "List",
   components: {
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     removeRecipe: function(recipeToDelete) {
-      UserService.removeRecipe(recipeToDelete)
+      RecipeService.removeRecipe(recipeToDelete)
         .then(res => {
           console.log(res);
           let index = this.recipesList.indexOf(recipeToDelete);
@@ -60,14 +60,14 @@ export default {
             this.recipesList.splice(index,1);
           }
           this.$toasted.success(
-            `Recette "${res.recette.titre}" supprimée! 💪`
+            `Recette "${res.recette.titre}" supprimée!`
           );
         })
         .catch(({ message }) => this.$toasted.error(message));
     }
   },
   created: function(){
-    UserService.fetchAll().then(recipesList => {
+    RecipeService.fetchAll().then(recipesList => {
         this.recipesList = recipesList;
     })
   }
@@ -76,8 +76,8 @@ export default {
 </script>
 <style scoped>
 h1{
-  font-family: 'cormorant';
-  font-size: 60px;
+  font-family: 'italianno';
+  font-size: 80px;
   color: #85B039;
 }
 form input, form select{

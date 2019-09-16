@@ -7,7 +7,7 @@
 </template>
 <script>
 import RecipeDetail from "./RecipeDetail.vue";
-import UserService from '../services/UserService.js';
+import RecipeService from '../services/RecipeService.js';
 
 export default {
   name: "Read",
@@ -21,12 +21,27 @@ export default {
     };
   },
 
+   methods: {
+    removeRecipe: function(recipeToDelete) {
+      console.log(recipeToDelete);
+      RecipeService.removeRecipe(recipeToDelete)
+        .then(res => {
+          this.$router.push('/list');
+          this.$toasted.success(`Recette ${res.recette.titre} supprimée !`);
+        })
+        .catch(({ message }) => this.$toasted.error(message));
+    }
+  },
   created: function(){
-    UserService.fetchOne(this.$route.params.id)
+    RecipeService.fetchOne(this.$route.params.id)
     .then(recipe => {
       console.log(recipe);
       this.recipe = recipe;
     })
+      .catch(({ message }) => {
+        this.$toasted.error(message);
+        this.$router.replace("/");
+      });
   }
 };
 

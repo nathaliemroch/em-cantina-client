@@ -27,17 +27,20 @@ export default {
 .navbar {
   background-color: #FDE166;
   overflow: hidden;
-  margin-bottom: 3em;
-  border-bottom: 10px solid white;
+  display: flex;
+  font-family: 'italianno';
 }
 .navbar-titre{
-  font-family: 'italianno';
-  font-size: 60px;
+  font-size: 58px !important;
 }
 .navbar > .container {
   display: flex;
   flex-flow: row;
   justify-content: flex-start;
+}
+
+.navbar a {
+  font-size: 30px;
 }
 
 .navbar a:link,
@@ -50,7 +53,7 @@ export default {
   transform: scale(1);
 }
 .navbar a:hover {
-  background-color: #fff;
+  background-color: #85B039;
   color: #FDE166;
   transform: scale(1.05);
 }
@@ -67,7 +70,4 @@ export default {
   list-style-type: none;
 }
 
-.navbar a:last-of-type {
-  margin-left: auto;
-}
 </style>

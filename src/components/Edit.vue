@@ -1,13 +1,13 @@
 <template>
   <div class="container centered">
-    <h1>Editer la recette</h1>
+    <h1>Modifier la recette</h1>
     <Form :recipe="recipe" v-if="recipe" @send="update"/>
   </div>
 </template>
 
 <script>
 import Form from "./Form";
-import UserService from "../services/UserService.js";
+import RecipeService from "../services/RecipeService";
 
 export default {
   name: "Edit",
@@ -20,22 +20,20 @@ export default {
     };
   },
   created: function() {
-    UserService.fetchOne(this.$route.params.id)
+    RecipeService.fetchOne(this.$route.params.id)
       .then(recipe => {
-        console.log(recipe);
         this.recipe = recipe;
       })
       .catch(({ message }) => {
         this.$toasted.error(message);
         this.$router.replace("/");
-        console.log(message);
       });
   },
   methods: {
     update: function(recipe) {
-      UserService.updateRecipe(recipe)
+      RecipeService.updateRecipe(recipe)
         .then(() => {
-          this.$toasted.success("Recette mise à jour ! 😉");
+          this.$toasted.success("Votre recette a été mise à jour !");
           this.$router.replace("/list");
         })
         .catch(({ message }) => this.$toasted.error(message));
@@ -44,10 +42,11 @@ export default {
 };
 </script>
 
+
 <style>
 h1{
-  font-family: 'cormorant';
-  font-size: 60px;
+  font-family: 'italianno';
+  font-size: 80px;
   color: #85B039;
 }
 </style>

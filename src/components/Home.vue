@@ -4,7 +4,7 @@
 
     <RecipeDetail :recipe="recipe" v-if="recipe" @remove="removeRecipe"/>
 
-    <div class="actions">
+    <div class="random">
       <a href="#" class="btn" @click.prevent="refreshPage">
         <i class="fa fa-random"/>Essayer une autre recette
       </a>
@@ -14,7 +14,7 @@
 
 <script>
 import RecipeDetail from "./RecipeDetail.vue";
-import UserService from "../services/UserService.js";
+import RecipeService from "../services/RecipeService.js";
 
 export default {
   name: "Home",
@@ -34,7 +34,7 @@ export default {
         document.location.reload(true);
     },
     removeRecipe: function(recipeToDelete) {
-      UserService.removeRecipe(recipeToDelete)
+      RecipeService.removeRecipe(recipeToDelete)
         .then(() => {
           let index = this.recipe(recipeToDelete);
           if (index > -1) {
@@ -47,7 +47,7 @@ export default {
     }
   },
   created: function() {
-    UserService.fetchAll()
+    RecipeService.fetchAll()
       .then(usersList => {
         this.recipe = usersList;
         this.getRandomRecipe();
@@ -58,6 +58,10 @@ export default {
 </script>
 
 <style>
+.random a {
+  text-decoration: none;
+  color: #85B039;
+}
 .conteneur-big{
 width: 75%;
 margin: 0 auto;

@@ -50,9 +50,15 @@ export default {
     text-align: center;
   }
 
-  .actions {
-    margin-top: 1.4em;
+  .random {
+        margin: 1.4em 0 2em;
   }
+
+  .random:hover {
+     font-size: 20px;
+    transition: 0.5s;
+  }
+  
 
   /**
    * Styles pour un bouton
@@ -61,7 +67,7 @@ export default {
 
   .btn.btn-small {
     padding: 0.15em 0.5em;
-    font-size: 0.9em;
+    font-size: 16px;
     text-decoration: none;
     color: #85B039;
   }
