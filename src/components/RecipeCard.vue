@@ -11,7 +11,7 @@
     <li class="list-group-item">Nombre de convives : {{recipe.personnes}} personne(s)</li>
     <li class="list-group-item">Niveau : {{recipe.niveau}}</li>
   </ul>
-  <div class="card-body">
+  <div class="card-body space">
     <router-link :to="`/read/${recipe.id}`" class="btn btn-small">Lire</router-link>
     <router-link :to="`/edit/${recipe.id}`" class="btn btn-small">Modifier</router-link>
     <a href="#" class="btn btn-small" @click.prevent="onRemove">Supprimer</a>
@@ -63,6 +63,11 @@ img{
 }
 h3, p{
     text-align: left;
+}
+
+.space {
+  display: flex;
+  justify-content: space-evenly;
 }
 .card-text-col-3-big{
     width: 40%;

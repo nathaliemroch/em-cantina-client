@@ -70,6 +70,9 @@ export default {
     font-size: 16px;
     text-decoration: none;
     color: #85B039;
+    background-color: white;
+    border-radius: 1em;
+    border: 1px solid #85B039;
   }
 
   .btn.btn-small:hover {

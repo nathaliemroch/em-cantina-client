@@ -59,6 +59,10 @@ export default {
 .random a {
   text-decoration: none;
   color: #85B039;
+  background-color: white;
+  border-radius: 1em;
+  border: 1px solid #85B039;
+  padding: 0.15em 0.5em;
 }
 .conteneur-big{
 width: 75%;
