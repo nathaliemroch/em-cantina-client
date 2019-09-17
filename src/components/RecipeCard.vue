@@ -29,7 +29,8 @@ export default {
   },
   computed : {
     DEFAULT_PHOTO: function(){
-      return "https://cdn.pixabay.com/photo/2019/09/15/14/42/14-42-27-793_960_720.png"
+      return "hhttps://cdn.pixabay.com/photo/2019/09/15/14/42/dish-4478482_960_720.png"
+
     }
   },
   methods: {
