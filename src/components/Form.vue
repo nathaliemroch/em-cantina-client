@@ -200,10 +200,6 @@ label {
   font-size: 25px;
 }
 
-@media screen and (max-width: 780px) {
- .col-2 {
-  flex-direction: column;
-}
 
 }
 .col-2 {

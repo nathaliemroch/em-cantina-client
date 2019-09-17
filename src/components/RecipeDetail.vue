@@ -94,12 +94,7 @@ export default {
   margin: 20px auto;
   text-align: center;
 }
-@media screen and (max-width: 880px) {
-  .wrapper, .wrapper2{
-    display: flex;
-    flex-direction: column;
-    width:100% !important;
-  }
+
 
   .detail{
     align-items: baseline;
@@ -140,10 +135,7 @@ export default {
 ul li{
   margin-bottom: 5px;
 }
-@media screen and (min-width: 880px) {
-.w-500 {
-  width: 50%;
-}}
+
 
 .ingredient{
    padding: 2em;
@@ -197,6 +189,7 @@ li {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 450px;
 }
 .titre-recette {
   color: #908f8f;
