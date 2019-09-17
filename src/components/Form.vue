@@ -219,7 +219,7 @@ label {
 input,
 select {
   width: 100%;
-  outline-color: red;
+  outline-color: #85B039;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -230,7 +230,7 @@ select {
 
 button {
   width: 30%;
-  background-color:#85B039;;
+  background-color:#85B039;
   color: white;
   padding: 14px 20px;
   border: none;
