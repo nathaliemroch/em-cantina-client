@@ -45,7 +45,8 @@ export default {
 
 .navbar a:link,
 .navbar a:visited {
-  color:  #fff;
+  background-color:  #fff;
+  color: #85B039;
   text-decoration: none;
   display: inline-block;
   padding: 0.25em 1em;
@@ -60,6 +61,7 @@ export default {
 }
 .navbar a.router-link-exact-active {
   background-color:#85B039;
+  color: #FDE166;
 }
 .navbar-nav{
   min-width: 380px;

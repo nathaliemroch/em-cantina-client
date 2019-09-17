@@ -58,12 +58,8 @@ export default {
      font-size: 20px;
     transition: 0.5s;
   }
-  
 
-  /**
-   * Styles pour un bouton
-   */
-
+  /* BUTONS */
 
   .btn.btn-small {
     padding: 0.15em 0.5em;
@@ -80,9 +76,7 @@ export default {
     transition: 0.5s;
   }
 
-  /**
-   * Style pour les formulaires
-   */
+  /* FORM */
 
   form input[type="text"],
   form input[type="search"],

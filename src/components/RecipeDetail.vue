@@ -67,7 +67,7 @@
 <script>
 import RecipeService from "../services/RecipeService.js";
 export default {
-  name: "TemplateDetail",
+  name: "RecipeDetail",
   props: {
     recipe: {
       type: Object

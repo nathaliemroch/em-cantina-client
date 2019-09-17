@@ -1,4 +1,3 @@
-// Uniformiser ce qui fait appel au serveur dans ce fichier
 import axios from 'axios';
 const API_ENDPOINT = 'http://localhost:9000/api';
 const errorHandler = (res) => {
@@ -10,9 +9,9 @@ const errorHandler = (res) => {
 
 export default {
     fetchAll : function(){
-        return axios.get(`${API_ENDPOINT}/recipes`) // axios est basé sur fetch mais rajoute d'autres fonctionnalités, il est compatible avec toutes les versions des navigateurs
+        return axios.get(`${API_ENDPOINT}/recipes`)
         .then(res => {console.log(res);
-        return res.data}); // avec fetch : res.json()
+        return res.data});
     },
     fetchOne: function (id) {
         return axios.get(`${API_ENDPOINT}/recipe/${id}`)

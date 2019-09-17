@@ -16,10 +16,8 @@ export default {
   },
   methods: {
     addRecipe: function(recipe) {
-      // Le formulaire est valide, on prépare donc l'envoi des données au serveur
       RecipeService.addRecipe(recipe)
         .then(() => {
-          // Redirige le visiteur vers la page de listing
           this.$router.replace("/list");
           this.$toasted.success("Recette ajoutée !");
         })
