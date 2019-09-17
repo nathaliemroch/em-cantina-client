@@ -96,16 +96,6 @@ export default {
 }
 
 
-  .detail{
-    align-items: baseline;
-  }
-
-  ul, li{
-    padding:0;margin:0;
-  }
- 
-}
-
 .wrapper, .wrapper2{
   width:900px;
   align-items: center;
@@ -135,7 +125,10 @@ export default {
 ul li{
   margin-bottom: 5px;
 }
-
+@media screen and (min-width: 880px) {
+.w-500 {
+  width: 50%;
+}}
 
 .ingredient{
    padding: 2em;
