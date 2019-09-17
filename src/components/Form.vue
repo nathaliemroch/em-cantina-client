@@ -201,7 +201,6 @@ label {
 }
 
 
-}
 .col-2 {
   display: flex;
   align-items: center;
