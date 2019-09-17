@@ -100,9 +100,7 @@ export default {
     flex-direction: column;
     width:100% !important;
   }
-  figure img{
-    max-width: 250px !important;
-  }
+
   .detail{
     align-items: baseline;
   }
@@ -122,7 +120,7 @@ export default {
 .wrapper {
   display: flex;
   justify-content: space-between;
-   margin: 20px auto;
+   margin: 40px auto;
 }
 .wrapper2 {
   display: flex;
@@ -218,7 +216,10 @@ li {
 }
 figure img {
   display: block;
-  max-width: 350px;
-  margin: auto;
+  max-width: 350px ;
+  padding: 15px;
+  background-color: white;
+  border-radius: 1em;
+  box-shadow: 8px 8px 30px -19px rgba(0,0,0,0.54);
 }
 </style>
