@@ -56,7 +56,7 @@
         </section>
       </div>
       <div class="btn-recette">
-        <a href="#" class="btn btn-small" @click.prevent="onRemove">Supprimer cette recette</a>&nbsp;
+        <!-- <a href="#" class="btn btn-small" @click.prevent="onRemove">Supprimer cette recette</a>&nbsp; -->
         <router-link :to="`/edit/${recipe.id}`" class="btn btn-small">Modifier</router-link>
       </div>
       
