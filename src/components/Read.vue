@@ -23,7 +23,6 @@ export default {
 
    methods: {
     removeRecipe: function(recipeToDelete) {
-      console.log(recipeToDelete);
       RecipeService.removeRecipe(recipeToDelete)
         .then(res => {
           this.$router.push('/list');
@@ -35,7 +34,6 @@ export default {
   created: function(){
     RecipeService.fetchOne(this.$route.params.id)
     .then(recipe => {
-      console.log(recipe);
       this.recipe = recipe;
     })
       .catch(({ message }) => {

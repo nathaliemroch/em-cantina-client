@@ -2,7 +2,7 @@
   <div class="container centered">
     <h1>Liste des recettes</h1>
 
-    <form class="filterform" @submit.prevent> <!-- submit.prevent évite d'envoyer des informations-->
+    <form class="filterform" @submit.prevent>
       <input type="search" placeholder="Tapez un nom..." v-model="searchText">
       <label for="filter">Filtrer par :</label>
       <select name="filterBy" v-model="filterValue">
@@ -38,14 +38,13 @@ export default {
         titre = titre.toLowerCase();
         description = description.toLowerCase();
 
-        if(this.filterValue === 'name'){ // si l'input dans le champ text est à "nom"  (filtrer par nom)
-
-        return ( // afficher les résulats des noms qui correspondent à l'input
+        if(this.filterValue === 'name'){ 
+        return ( 
           `${titre}`.includes(searchText)          
         )}
 
-        else if (this.filterValue === 'niveau'){ // si l'input dans le champ text est à "niveau"  (filtrer par localistation)
-          return `${niveau}`.includes(searchText);// afficher les résulats des niveaux qui correspondent à l'input
+        else if (this.filterValue === 'niveau'){
+          return `${niveau}`.includes(searchText);
         }
       });
     }
@@ -54,7 +53,6 @@ export default {
     removeRecipe: function(recipeToDelete) {
       RecipeService.removeRecipe(recipeToDelete)
         .then(res => {
-          console.log(res);
           let index = this.recipesList.indexOf(recipeToDelete);
           if (index > -1) {
             this.recipesList.splice(index,1);
